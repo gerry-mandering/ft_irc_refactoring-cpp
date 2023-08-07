@@ -1,4 +1,6 @@
 # clion
+CMakeLists.txt
+.clang-format
 .idea
 cmake-build-debug
 
