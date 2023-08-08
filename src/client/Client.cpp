@@ -3,6 +3,11 @@
 
 Client::Client(Socket socket) : mSocket(socket) {}
 
+int Client::GetSocket() const
+{
+    return mSocket;
+}
+
 void Client::JoinChannel(shared_ptr< Channel > channel)
 {
     mChannels.push_back(channel);

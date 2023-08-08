@@ -16,6 +16,8 @@ class Client : public enable_shared_from_this< Client >
     Client() = delete;
     ~Client() = default;
 
+    Socket GetSocket() const;
+
     void JoinChannel(shared_ptr< Channel > channel);
     void LeaveChannel(shared_ptr< Channel > channel);
 
