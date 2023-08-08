@@ -20,7 +20,9 @@ void Client::LeaveChannel(shared_ptr< Channel > channel)
     {
         auto locked = it->lock();
         if (!locked)
+        {
             continue;
+        }
 
         if (locked == channel)
         {

@@ -17,18 +17,26 @@ shared_ptr< Client > ClientRepository::FindBySocket(Socket socket)
 {
     auto it = mSocketToClientMap.find(socket);
     if (it != mSocketToClientMap.end())
+    {
         return it->second;
-
-    return nullptr;
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 shared_ptr< Client > ClientRepository::FindByName(const string &name)
 {
     auto it = mNicknameToClientMap.find(name);
     if (it != mNicknameToClientMap.end())
+    {
         return it->second;
-
-    return nullptr;
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 int ClientRepository::GetNumberOfClients() const
@@ -42,7 +50,9 @@ void ClientRepository::RemoveClient(shared_ptr< Client > client)
 
     auto it = mSocketToClientMap.find(client->GetSocket());
     if (it != mSocketToClientMap.end())
+    {
         mSocketToClientMap.erase(it);
+    }
 
     return;
 }
@@ -51,7 +61,9 @@ void ClientRepository::RemoveClientFromNicknameMap(shared_ptr< Client > client)
 {
     auto it = mNicknameToClientMap.find(client->GetNickname());
     if (it != mNicknameToClientMap.end())
+    {
         mNicknameToClientMap.erase(it);
+    }
 
     return;
 }
