@@ -5,25 +5,79 @@ Channel::Channel(const string &name) : mName(name) {}
 
 int Channel::GetNumberOfClients() const
 {
-    return 0;
+    return mClients.size();
 }
 
-bool Channel::IsClientInvited(shared_ptr< Client >) const
+bool Channel::IsClientInvited(shared_ptr< Client > client) const
 {
+    for (const auto &invitedClient : mInvitedClients)
+    {
+        auto locked = invitedClient.lock();
+        if (!locked)
+        {
+            continue;
+        }
+
+        if (locked == client)
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 
-void Channel::AddClient(shared_ptr< Client >) {}
+void Channel::AddClient(shared_ptr< Client > newClient)
+{
+    mClients.push_back(newClient);
+}
 
-void Channel::AddOperator(shared_ptr< Client >) {}
+void Channel::AddAdmin(shared_ptr< Client > newAdmin)
+{
+    mAdmins.push_back(newAdmin);
+}
 
-void Channel::AddInvitedClient(shared_ptr< Client >) {}
+void Channel::AddInvitedClient(shared_ptr< Client > newInvitedClient)
+{
+    mInvitedClients.push_back(newInvitedClient);
+}
 
-void Channel::RemoveClient(shared_ptr< Client >) {}
+void Channel::RemoveClient(shared_ptr< Client > client)
+{
+    RemoveAdmin(client);
 
-void Channel::RemoveOperator(shared_ptr< Client >) {}
+    auto it = find(mClients.begin(), mClients.end(), client);
+    if (it != mClients.end())
+    {
+        mClients.erase(it);
+    }
+}
 
-void Channel::RemoveInvitedClient(shared_ptr< Client >) {}
+void Channel::RemoveAdmin(shared_ptr< Client > admin)
+{
+    auto it = find(mAdmins.begin(), mAdmins.end(), admin);
+    if (it != mAdmins.end())
+    {
+        mAdmins.erase(it);
+    }
+}
+
+void Channel::RemoveInvitedClient(shared_ptr< Client > invitedClient)
+{
+    for (auto it = mInvitedClients.begin(); it != mInvitedClients.end(); it++)
+    {
+        auto locked = it->lock();
+        if (!locked)
+        {
+            continue;
+        }
+
+        if (locked == invitedClient)
+        {
+            mInvitedClients.erase(it);
+        }
+    }
+}
 
 const string &Channel::GetName() const
 {

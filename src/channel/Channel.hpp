@@ -17,15 +17,15 @@ class Channel : public enable_shared_from_this< Channel >
     ~Channel() = default;
 
     int GetNumberOfClients() const;
-    bool IsClientInvited(shared_ptr< Client >) const;
+    bool IsClientInvited(shared_ptr< Client > client) const;
 
-    void AddClient(shared_ptr< Client >);
-    void AddOperator(shared_ptr< Client >);
-    void AddInvitedClient(shared_ptr< Client >);
+    void AddClient(shared_ptr< Client > newClient);
+    void AddAdmin(shared_ptr< Client > newAdmin);
+    void AddInvitedClient(shared_ptr< Client > newInvitedClient);
 
-    void RemoveClient(shared_ptr< Client >);
-    void RemoveOperator(shared_ptr< Client >);
-    void RemoveInvitedClient(shared_ptr< Client >);
+    void RemoveClient(shared_ptr< Client > client);
+    void RemoveAdmin(shared_ptr< Client > admin);
+    void RemoveInvitedClient(shared_ptr< Client > invitedClient);
 
     const string &GetName() const;
     const string &GetTopic() const;
@@ -39,7 +39,7 @@ class Channel : public enable_shared_from_this< Channel >
 
   private:
     vector< shared_ptr< Client > > mClients;
-    vector< shared_ptr< Client > > mOperators;
+    vector< shared_ptr< Client > > mAdmins;
     vector< weak_ptr< Client > > mInvitedClients;
 
     string mName{};
