@@ -2,10 +2,6 @@
 
 shared_ptr< Channel > ChannelRepository::CreateChannel(const string &name)
 {
-    auto it = mChannels.find(name);
-    if (it != mChannels.end())
-        return it->second;
-
     shared_ptr< Channel > newChannel = make_shared< Channel >(name);
     mChannels[name] = newChannel;
 
