@@ -53,8 +53,6 @@ void ClientRepository::RemoveClient(shared_ptr< Client > client)
     {
         mSocketToClientMap.erase(it);
     }
-
-    return;
 }
 
 void ClientRepository::RemoveClientFromNicknameMap(shared_ptr< Client > client)
@@ -64,6 +62,4 @@ void ClientRepository::RemoveClientFromNicknameMap(shared_ptr< Client > client)
     {
         mNicknameToClientMap.erase(it);
     }
-
-    return;
 }
