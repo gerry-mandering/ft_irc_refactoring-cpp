@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 
+// FIXME
+typedef int Socket;
+
 using namespace std;
 
 class Channel;

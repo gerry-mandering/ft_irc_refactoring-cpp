@@ -5,6 +5,9 @@
 #include <map>
 #include <memory>
 
+// FIXME
+typedef int Socket;
+
 using namespace std;
 
 class ClientRepository : public Singleton< ClientRepository >
