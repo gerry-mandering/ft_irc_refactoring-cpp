@@ -4,7 +4,10 @@
 #include "VisitorPattern.hpp"
 #include <memory>
 
-class Request : public visitor_pattern::Acceptor
+// FIXME
+typedef int Socket;
+
+class Request
 {
   public:
     Request(Socket socket);
