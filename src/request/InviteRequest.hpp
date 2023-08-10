@@ -31,6 +31,6 @@ class InviteRequestBuilder : public RequestBuilder
     Request *Build() override;
 
   private:
-    std::string mNickname;
-    std::string mChannelname;
+    std::string mNickname{};
+    std::string mChannelname{};
 };

@@ -31,6 +31,6 @@ class JoinRequestBuilder : public RequestBuilder
     Request *Build() override;
 
   private:
-    std::string mChannelname;
-    std::string mPassword;
+    std::string mChannelname{};
+    std::string mPassword{};
 };
