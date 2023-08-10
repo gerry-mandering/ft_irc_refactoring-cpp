@@ -34,6 +34,7 @@ class Visitor
 
 class Acceptor
 {
+  public:
     virtual bool Accept(visitor_pattern::Visitor *visitor) = 0;
 };
 } // namespace visitor_pattern
