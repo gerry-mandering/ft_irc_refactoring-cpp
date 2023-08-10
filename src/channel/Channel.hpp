@@ -4,47 +4,45 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 class Client;
 
-class Channel : public enable_shared_from_this< Channel >
+class Channel : public std::enable_shared_from_this< Channel >
 {
   public:
-    Channel(const string &name);
+    Channel(const std::string &name);
 
     Channel() = delete;
     ~Channel() = default;
 
     int GetNumberOfClients() const;
-    bool IsClientInvited(shared_ptr< Client > client) const;
+    bool IsClientInvited(std::shared_ptr< Client > client) const;
 
-    void AddClient(shared_ptr< Client > newClient);
-    void AddAdmin(shared_ptr< Client > newAdmin);
-    void AddInvitedClient(shared_ptr< Client > newInvitedClient);
+    void AddClient(std::shared_ptr< Client > newClient);
+    void AddAdmin(std::shared_ptr< Client > newAdmin);
+    void AddInvitedClient(std::shared_ptr< Client > newInvitedClient);
 
-    void RemoveClient(shared_ptr< Client > client);
-    void RemoveAdmin(shared_ptr< Client > admin);
-    void RemoveInvitedClient(shared_ptr< Client > invitedClient);
+    void RemoveClient(std::shared_ptr< Client > client);
+    void RemoveAdmin(std::shared_ptr< Client > admin);
+    void RemoveInvitedClient(std::shared_ptr< Client > invitedClient);
 
-    const string &GetName() const;
-    const string &GetTopic() const;
-    const string &GetPassword() const;
+    const std::string &GetName() const;
+    const std::string &GetTopic() const;
+    const std::string &GetPassword() const;
     int GetMaxClients() const;
 
-    void SetName(const string &name);
-    void SetTopic(const string &topic);
-    void SetPassword(const string &password);
+    void SetName(const std::string &name);
+    void SetTopic(const std::string &topic);
+    void SetPassword(const std::string &password);
     void SetMaxClients(int maxClients);
 
   private:
-    vector< shared_ptr< Client > > mClients;
-    vector< shared_ptr< Client > > mAdmins;
-    vector< weak_ptr< Client > > mInvitedClients;
+    std::vector< std::shared_ptr< Client > > mClients;
+    std::vector< std::shared_ptr< Client > > mAdmins;
+    std::vector< std::weak_ptr< Client > > mInvitedClients;
 
-    string mName{};
-    string mTopic{};
-    string mPassword{};
+    std::string mName{};
+    std::string mTopic{};
+    std::string mPassword{};
     int mMaxClients{};
 
     int mModeFlags{};

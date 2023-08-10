@@ -1,19 +1,19 @@
 #include "ClientRepository.hpp"
 
-shared_ptr< Client > ClientRepository::CreateClient(Socket socket)
+std::shared_ptr< Client > ClientRepository::CreateClient(Socket socket)
 {
-    shared_ptr< Client > client = make_shared< Client >(socket);
+    std::shared_ptr< Client > client = std::make_shared< Client >(socket);
     mSocketToClientMap[socket] = client;
 
     return client;
 }
 
-void ClientRepository::AddClientToNicknameMap(shared_ptr< Client > client)
+void ClientRepository::AddClientToNicknameMap(std::shared_ptr< Client > client)
 {
     mNicknameToClientMap[client->GetNickname()] = client;
 }
 
-shared_ptr< Client > ClientRepository::FindBySocket(Socket socket)
+std::shared_ptr< Client > ClientRepository::FindBySocket(Socket socket)
 {
     auto it = mSocketToClientMap.find(socket);
     if (it != mSocketToClientMap.end())
@@ -26,7 +26,7 @@ shared_ptr< Client > ClientRepository::FindBySocket(Socket socket)
     }
 }
 
-shared_ptr< Client > ClientRepository::FindByName(const string &name)
+std::shared_ptr< Client > ClientRepository::FindByName(const std::string &name)
 {
     auto it = mNicknameToClientMap.find(name);
     if (it != mNicknameToClientMap.end())
@@ -44,7 +44,7 @@ int ClientRepository::GetNumberOfClients() const
     return mSocketToClientMap.size();
 }
 
-void ClientRepository::RemoveClient(shared_ptr< Client > client)
+void ClientRepository::RemoveClient(std::shared_ptr< Client > client)
 {
     RemoveClientFromNicknameMap(client);
 
@@ -55,7 +55,7 @@ void ClientRepository::RemoveClient(shared_ptr< Client > client)
     }
 }
 
-void ClientRepository::RemoveClientFromNicknameMap(shared_ptr< Client > client)
+void ClientRepository::RemoveClientFromNicknameMap(std::shared_ptr< Client > client)
 {
     auto it = mNicknameToClientMap.find(client->GetNickname());
     if (it != mNicknameToClientMap.end())

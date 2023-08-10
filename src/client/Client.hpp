@@ -7,11 +7,9 @@
 // FIXME
 typedef int Socket;
 
-using namespace std;
-
 class Channel;
 
-class Client : public enable_shared_from_this< Client >
+class Client : public std::enable_shared_from_this< Client >
 {
   public:
     Client(Socket socket);
@@ -21,20 +19,20 @@ class Client : public enable_shared_from_this< Client >
 
     Socket GetSocket() const;
 
-    void JoinChannel(shared_ptr< Channel > channel);
-    void LeaveChannel(shared_ptr< Channel > channel);
+    void JoinChannel(std::shared_ptr< Channel > channel);
+    void LeaveChannel(std::shared_ptr< Channel > channel);
 
-    const string &GetNickname() const;
-    const string &GetUsername() const;
-    const string &GetHostname() const;
-    const string &GetServername() const;
-    const string &GetRealname() const;
+    const std::string &GetNickname() const;
+    const std::string &GetUsername() const;
+    const std::string &GetHostname() const;
+    const std::string &GetServername() const;
+    const std::string &GetRealname() const;
 
-    void SetNickname(const string &nickname);
-    void SetUsername(const string &username);
-    void SetHostname(const string &hostname);
-    void SetServername(const string &servername);
-    void SetRealname(const string &realname);
+    void SetNickname(const std::string &nickname);
+    void SetUsername(const std::string &username);
+    void SetHostname(const std::string &hostname);
+    void SetServername(const std::string &servername);
+    void SetRealname(const std::string &realname);
 
     bool HasRegistered() const;
     bool HasEnteredPassword() const;
@@ -49,13 +47,13 @@ class Client : public enable_shared_from_this< Client >
   private:
     Socket mSocket;
 
-    vector< weak_ptr< Channel > > mChannels;
+    std::vector< std::weak_ptr< Channel > > mChannels;
 
-    string mNickname{};
-    string mUsername{};
-    string mHostname{};
-    string mServername{};
-    string mRealname{};
+    std::string mNickname{};
+    std::string mUsername{};
+    std::string mHostname{};
+    std::string mServername{};
+    std::string mRealname{};
 
     int mRegistrationFlags{};
 

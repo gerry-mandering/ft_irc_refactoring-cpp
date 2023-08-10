@@ -8,23 +8,21 @@
 // FIXME
 typedef int Socket;
 
-using namespace std;
-
 class ClientRepository : public Singleton< ClientRepository >
 {
   public:
-    shared_ptr< Client > CreateClient(Socket socket);
-    void AddClientToNicknameMap(shared_ptr< Client > client);
+    std::shared_ptr< Client > CreateClient(Socket socket);
+    void AddClientToNicknameMap(std::shared_ptr< Client > client);
 
-    shared_ptr< Client > FindBySocket(Socket socket);
-    shared_ptr< Client > FindByName(const string &name);
+    std::shared_ptr< Client > FindBySocket(Socket socket);
+    std::shared_ptr< Client > FindByName(const string &name);
 
     int GetNumberOfClients() const;
 
-    void RemoveClient(shared_ptr< Client > client);
-    void RemoveClientFromNicknameMap(shared_ptr< Client > client);
+    void RemoveClient(std::shared_ptr< Client > client);
+    void RemoveClientFromNicknameMap(std::shared_ptr< Client > client);
 
   private:
-    map< Socket, shared_ptr< Client > > mSocketToClientMap;
-    map< string, shared_ptr< Client > > mNicknameToClientMap;
+    std::map< Socket, std::shared_ptr< Client > > mSocketToClientMap;
+    std::map< string, std::shared_ptr< Client > > mNicknameToClientMap;
 };

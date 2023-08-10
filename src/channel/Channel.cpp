@@ -1,14 +1,14 @@
 #include "Channel.hpp"
 #include "Client.hpp"
 
-Channel::Channel(const string &name) : mName(name) {}
+Channel::Channel(const std::string &name) : mName(name) {}
 
 int Channel::GetNumberOfClients() const
 {
     return mClients.size();
 }
 
-bool Channel::IsClientInvited(shared_ptr< Client > client) const
+bool Channel::IsClientInvited(std::shared_ptr< Client > client) const
 {
     for (const auto &invitedClient : mInvitedClients)
     {
@@ -27,22 +27,22 @@ bool Channel::IsClientInvited(shared_ptr< Client > client) const
     return false;
 }
 
-void Channel::AddClient(shared_ptr< Client > newClient)
+void Channel::AddClient(std::shared_ptr< Client > newClient)
 {
     mClients.push_back(newClient);
 }
 
-void Channel::AddAdmin(shared_ptr< Client > newAdmin)
+void Channel::AddAdmin(std::shared_ptr< Client > newAdmin)
 {
     mAdmins.push_back(newAdmin);
 }
 
-void Channel::AddInvitedClient(shared_ptr< Client > newInvitedClient)
+void Channel::AddInvitedClient(std::shared_ptr< Client > newInvitedClient)
 {
     mInvitedClients.push_back(newInvitedClient);
 }
 
-void Channel::RemoveClient(shared_ptr< Client > client)
+void Channel::RemoveClient(std::shared_ptr< Client > client)
 {
     RemoveAdmin(client);
 
@@ -53,7 +53,7 @@ void Channel::RemoveClient(shared_ptr< Client > client)
     }
 }
 
-void Channel::RemoveAdmin(shared_ptr< Client > admin)
+void Channel::RemoveAdmin(std::shared_ptr< Client > admin)
 {
     auto it = find(mAdmins.begin(), mAdmins.end(), admin);
     if (it != mAdmins.end())
@@ -62,7 +62,7 @@ void Channel::RemoveAdmin(shared_ptr< Client > admin)
     }
 }
 
-void Channel::RemoveInvitedClient(shared_ptr< Client > invitedClient)
+void Channel::RemoveInvitedClient(std::shared_ptr< Client > invitedClient)
 {
     for (auto it = mInvitedClients.begin(); it != mInvitedClients.end(); it++)
     {
@@ -79,17 +79,17 @@ void Channel::RemoveInvitedClient(shared_ptr< Client > invitedClient)
     }
 }
 
-const string &Channel::GetName() const
+const std::string &Channel::GetName() const
 {
     return mName;
 }
 
-const string &Channel::GetTopic() const
+const std::string &Channel::GetTopic() const
 {
     return mTopic;
 }
 
-const string &Channel::GetPassword() const
+const std::string &Channel::GetPassword() const
 {
     return mPassword;
 }
@@ -99,17 +99,17 @@ int Channel::GetMaxClients() const
     return mMaxClients;
 }
 
-void Channel::SetName(const string &name)
+void Channel::SetName(const std::string &name)
 {
     Channel::mName = name;
 }
 
-void Channel::SetTopic(const string &topic)
+void Channel::SetTopic(const std::string &topic)
 {
     Channel::mTopic = topic;
 }
 
-void Channel::SetPassword(const string &password)
+void Channel::SetPassword(const std::string &password)
 {
     Channel::mPassword = password;
 }
