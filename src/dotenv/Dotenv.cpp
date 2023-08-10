@@ -40,6 +40,6 @@ std::string Dotenv::Get(const std::string &key)
     }
     else
     {
-        return "";
+        return {};
     }
 }
