@@ -9,12 +9,13 @@ typedef int Socket;
 class Request
 {
   public:
-    Request(Socket socket);
-
     Request() = delete;
     virtual ~Request() = default;
 
     std::shared_ptr< Client > GetClient() const;
+
+  protected:
+    Request(Socket socket);
 
   private:
     Socket mSocket;
@@ -25,10 +26,6 @@ class RequestBuilder
 {
   public:
     virtual ~RequestBuilder() = default;
+    virtual RequestBuilder &SetSocket(Socket socket) = 0;
     virtual Request *Build() = 0;
-
-    RequestBuilder &SetSocket(Socket socket);
-
-  public:
-    Socket mSocket;
 };
