@@ -5,33 +5,40 @@ bool JoinRequest::Accept(visitor_pattern::Visitor *visitor)
     return visitor->Visit(this);
 }
 
-const std::string &JoinRequest::GetChannelname() const
+const std::vector< std::string > &JoinRequest::GetChannelnames() const
 {
-    return mChannelname;
+    return mChannelnames;
 }
 
-const std::string &JoinRequest::GetPassword() const
+const std::vector< std::string > &JoinRequest::GetPasswords() const
 {
-    return mPassword;
+    return mPasswords;
 }
 
-JoinRequest::JoinRequest(Socket socket, const std::string &channelname, const std::string &password) : Request(socket)
+void JoinRequest::SetChannelnames(const std::vector< std::string > &channelnames)
+{
+    mChannelnames = channelnames;
+}
+
+JoinRequest::JoinRequest(Socket socket, const std::vector< std::string > &channelnames,
+                         const std::vector< std::string > &passwords)
+    : Request(socket)
 {
 }
 
-JoinRequestBuilder &JoinRequestBuilder::SetChannelname(const std::string &channelname)
+JoinRequestBuilder &JoinRequestBuilder::SetChannelnames(const std::string &channelnames)
 {
-    mChannelname = channelname;
+    mChannelnames = channelnames;
     return *this;
 }
 
-JoinRequestBuilder &JoinRequestBuilder::SetPassword(const std::string &password)
+JoinRequestBuilder &JoinRequestBuilder::SetPasswords(const std::string &passwords)
 {
-    mPassword = password;
+    mPasswords = passwords;
     return *this;
 }
 
 Request *JoinRequestBuilder::Build()
 {
-    return new JoinRequest(mSocket, mChannelname, mPassword);
+    return new JoinRequest(mSocket, mChannelnames, mPasswords);
 }
