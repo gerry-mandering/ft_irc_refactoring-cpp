@@ -8,6 +8,17 @@ int Channel::GetNumberOfClients() const
     return mClients.size();
 }
 
+bool Channel::IsClientExist(std::shared_ptr< Client > client) const
+{
+    auto it = std::find(mClients.begin(), mClients.end(), client);
+    if (it != mClients.end())
+    {
+        return true;
+    }
+
+    return false;
+}
+
 bool Channel::IsClientInvited(std::shared_ptr< Client > client) const
 {
     for (const auto &invitedClient : mInvitedClients)
@@ -46,7 +57,7 @@ void Channel::RemoveClient(std::shared_ptr< Client > client)
 {
     RemoveAdmin(client);
 
-    auto it = find(mClients.begin(), mClients.end(), client);
+    auto it = std::find(mClients.begin(), mClients.end(), client);
     if (it != mClients.end())
     {
         mClients.erase(it);
@@ -55,7 +66,7 @@ void Channel::RemoveClient(std::shared_ptr< Client > client)
 
 void Channel::RemoveAdmin(std::shared_ptr< Client > admin)
 {
-    auto it = find(mAdmins.begin(), mAdmins.end(), admin);
+    auto it = std::find(mAdmins.begin(), mAdmins.end(), admin);
     if (it != mAdmins.end())
     {
         mAdmins.erase(it);
