@@ -38,8 +38,8 @@ class ModeRequestBuilder : public RequestBuilder
     Request *Build() override;
 
   private:
-    std::string mChannelname;
-    std::string mSign;
-    std::string mModeChar;
-    std::string mModeArgument;
+    std::string mChannelname{};
+    std::string mSign{};
+    std::string mModeChar{};
+    std::string mModeArgument{};
 };

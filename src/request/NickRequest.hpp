@@ -28,5 +28,5 @@ class NickRequestBuilder : public RequestBuilder
     Request *Build() override;
 
   private:
-    std::string mNickname;
+    std::string mNickname{};
 };
