@@ -7,8 +7,20 @@ class Singleton
   public:
     static T &GetInstance()
     {
-        static T mInstance;
+        if (mInstance == nullptr)
+        {
+            mInstance = new T;
+        }
         return mInstance;
+    }
+
+    static void DeleteInstance()
+    {
+        if (mInstance != nullptr)
+        {
+            delete mInstance;
+            mInstance = nullptr;
+        }
     }
 
     Singleton(const Singleton &) = delete;
@@ -17,4 +29,10 @@ class Singleton
   protected:
     Singleton() = default;
     ~Singleton() = default;
+
+  private:
+    static T *mInstance;
 };
+
+template < class T >
+T *Singleton< T >::mInstance = nullptr;
