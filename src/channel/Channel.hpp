@@ -16,6 +16,7 @@ class Channel : public std::enable_shared_from_this< Channel >
 
     int GetNumberOfClients() const;
     bool IsClientExist(std::shared_ptr< Client > client) const;
+    bool IsClientAdmin(std::shared_ptr< Client > client) const;
     bool IsClientInvited(std::shared_ptr< Client > client) const;
 
     void AddClient(std::shared_ptr< Client > newClient);

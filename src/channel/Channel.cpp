@@ -19,6 +19,17 @@ bool Channel::IsClientExist(std::shared_ptr< Client > client) const
     return false;
 }
 
+bool Channel::IsClientAdmin(std::shared_ptr< Client > client) const
+{
+    auto it = std::find(mAdmins.begin(), mAdmins.end(), client);
+    if (it != mAdmins.end())
+    {
+        return true;
+    }
+
+    return false;
+}
+
 bool Channel::IsClientInvited(std::shared_ptr< Client > client) const
 {
     for (const auto &invitedClient : mInvitedClients)
