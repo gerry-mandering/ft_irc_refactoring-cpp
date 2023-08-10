@@ -34,6 +34,6 @@ class PrivmsgRequestBuilder : public RequestBuilder
     Request *Build() override;
 
   private:
-    std::vector< std::string > mTargets;
-    std::string mMessage;
+    std::vector< std::string > mTargets{};
+    std::string mMessage{};
 };
