@@ -14,9 +14,3 @@ std::shared_ptr< Client > Request::GetClient() const
 {
     return mClient;
 }
-
-RequestBuilder &RequestBuilder::SetSocket(Socket socket)
-{
-    mSocket = socket;
-    return *this;
-}
