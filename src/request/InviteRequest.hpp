@@ -2,6 +2,7 @@
 
 #include "Request.hpp"
 #include "VisitorPattern.hpp"
+#include <string>
 
 class InviteRequest : public Request, public visitor_pattern::Acceptor
 {
