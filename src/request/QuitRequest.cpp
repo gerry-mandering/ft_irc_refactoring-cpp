@@ -12,6 +12,12 @@ const std::string &QuitRequest::GetReason() const
 
 QuitRequest::QuitRequest(Socket socket, const std::string &reason) : Request(socket) {}
 
+QuitRequestBuilder &QuitRequestBuilder::SetSocket(Socket socket)
+{
+    mSocket = socket;
+    return *this;
+}
+
 QuitRequestBuilder &QuitRequestBuilder::SetReason(const std::string &reason)
 {
     mReason = reason;

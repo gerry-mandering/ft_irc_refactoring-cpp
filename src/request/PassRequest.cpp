@@ -12,6 +12,12 @@ const std::string &PassRequest::GetPassword() const
 
 PassRequest::PassRequest(Socket socket, const std::string &password) : Request(socket) {}
 
+PassRequestBuilder &PassRequestBuilder::SetSocket(Socket socket)
+{
+    mSocket = socket;
+    return *this;
+}
+
 PassRequestBuilder &PassRequestBuilder::SetPassword(const std::string &password)
 {
     mPassword = password;

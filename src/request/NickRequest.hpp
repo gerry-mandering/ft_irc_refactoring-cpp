@@ -23,10 +23,12 @@ class NickRequest : public Request, public visitor_pattern::Acceptor
 class NickRequestBuilder : public RequestBuilder
 {
   public:
+    NickRequestBuilder &SetSocket(Socket socket) override;
     NickRequestBuilder &SetNickname(const std::string &nickname);
 
     Request *Build() override;
 
   private:
+    Socket mSocket{};
     std::string mNickname{};
 };

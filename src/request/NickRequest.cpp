@@ -12,6 +12,12 @@ const std::string &NickRequest::GetNickname() const
 
 NickRequest::NickRequest(Socket socket, const std::string &nickname) : Request(socket) {}
 
+NickRequestBuilder &NickRequestBuilder::SetSocket(Socket socket)
+{
+    mSocket = socket;
+    return *this;
+}
+
 NickRequestBuilder &NickRequestBuilder::SetNickname(const std::string &nickname)
 {
     mNickname = nickname;

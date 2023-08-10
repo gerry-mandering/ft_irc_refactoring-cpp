@@ -31,6 +31,7 @@ class KickRequest : public Request, public visitor_pattern::Acceptor
 class KickRequestBuilder : public RequestBuilder
 {
   public:
+    KickRequestBuilder &SetSocket(Socket socket) override;
     KickRequestBuilder &SetChannelname(const std::string &channelname);
     KickRequestBuilder &SetTargets(const std::vector< std::string > &targets);
     KickRequestBuilder &SetMessage(const std::string &message);
@@ -38,6 +39,7 @@ class KickRequestBuilder : public RequestBuilder
     Request *Build() override;
 
   private:
+    Socket mSocket{};
     std::string mChannelname{};
     std::vector< std::string > mTargets{};
     std::string mMessage{};

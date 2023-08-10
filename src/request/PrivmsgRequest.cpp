@@ -25,6 +25,12 @@ PrivmsgRequest::PrivmsgRequest(Socket socket, const std::vector< std::string > &
 {
 }
 
+PrivmsgRequestBuilder &PrivmsgRequestBuilder::SetSocket(Socket socket)
+{
+    mSocket = socket;
+    return *this;
+}
+
 PrivmsgRequestBuilder &PrivmsgRequestBuilder::SetTargets(const std::vector< std::string > &targets)
 {
     mTargets = targets;

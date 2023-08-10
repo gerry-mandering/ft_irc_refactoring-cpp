@@ -25,6 +25,12 @@ PartRequest::PartRequest(Socket socket, const std::vector< std::string > &channe
 {
 }
 
+PartRequestBuilder &PartRequestBuilder::SetSocket(Socket socket)
+{
+    mSocket = socket;
+    return *this;
+}
+
 PartRequestBuilder &PartRequestBuilder::SetChannelnames(const std::vector< std::string > &channelnames)
 {
     mChannelnames = channelnames;

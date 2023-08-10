@@ -17,6 +17,12 @@ const std::string &TopicRequest::GetTopic() const
 
 TopicRequest::TopicRequest(Socket socket, const std::string &channelname, const std::string &topic) : Request(socket) {}
 
+TopicRequestBuilder &TopicRequestBuilder::SetSocket(Socket socket)
+{
+    mSocket = socket;
+    return *this;
+}
+
 TopicRequestBuilder &TopicRequestBuilder::SetChannelname(const std::string &channelname)
 {
     mChannelname = channelname;

@@ -23,10 +23,12 @@ class PingRequest : public Request, public visitor_pattern::Acceptor
 class PingRequestBuilder : public RequestBuilder
 {
   public:
+    PingRequestBuilder &SetSocket(Socket socket) override;
     PingRequestBuilder &SetToken(const std::string &token);
 
     Request *Build() override;
 
   private:
+    Socket mSocket{};
     std::string mToken{};
 };

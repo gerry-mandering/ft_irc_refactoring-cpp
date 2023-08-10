@@ -28,12 +28,14 @@ class PrivmsgRequest : public Request, public visitor_pattern::Acceptor
 class PrivmsgRequestBuilder : public RequestBuilder
 {
   public:
+    PrivmsgRequestBuilder &SetSocket(Socket socket) override;
     PrivmsgRequestBuilder &SetTargets(const std::vector< std::string > &targets);
     PrivmsgRequestBuilder &SetMessage(const std::string &message);
 
     Request *Build() override;
 
   private:
+    Socket mSocket{};
     std::vector< std::string > mTargets{};
     std::string mMessage{};
 };

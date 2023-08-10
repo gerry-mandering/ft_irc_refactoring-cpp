@@ -31,6 +31,12 @@ ModeRequest::ModeRequest(Socket socket, const std::string &channelname, const st
 {
 }
 
+ModeRequestBuilder &ModeRequestBuilder::SetSocket(Socket socket)
+{
+    mSocket = socket;
+    return *this;
+}
+
 ModeRequestBuilder &ModeRequestBuilder::SetChannelname(const std::string &channelname)
 {
     mChannelname = channelname;

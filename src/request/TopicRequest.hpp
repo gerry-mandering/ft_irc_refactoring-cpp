@@ -25,12 +25,14 @@ class TopicRequest : public Request, public visitor_pattern::Acceptor
 class TopicRequestBuilder : public RequestBuilder
 {
   public:
+    TopicRequestBuilder &SetSocket(Socket socket) override;
     TopicRequestBuilder &SetChannelname(const std::string &channelname);
     TopicRequestBuilder &SetTopic(const std::string &topic);
 
     Request *Build() override;
 
   private:
+    Socket mSocket{};
     std::string mChannelname{};
     std::string mTopic{};
 };

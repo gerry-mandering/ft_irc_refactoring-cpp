@@ -30,6 +30,7 @@ class ModeRequest : public Request, public visitor_pattern::Acceptor
 class ModeRequestBuilder : public RequestBuilder
 {
   public:
+    ModeRequestBuilder &SetSocket(Socket socket) override;
     ModeRequestBuilder &SetChannelname(const std::string &channelname);
     ModeRequestBuilder &SetSign(const std::string &sign);
     ModeRequestBuilder &SetModeChar(const std::string &modeChar);
@@ -38,6 +39,7 @@ class ModeRequestBuilder : public RequestBuilder
     Request *Build() override;
 
   private:
+    Socket mSocket{};
     std::string mChannelname{};
     std::string mSign{};
     std::string mModeChar{};

@@ -23,10 +23,12 @@ class QuitRequest : public Request, public visitor_pattern::Acceptor
 class QuitRequestBuilder : public RequestBuilder
 {
   public:
+    QuitRequestBuilder &SetSocket(Socket socket) override;
     QuitRequestBuilder &SetReason(const std::string &reason);
 
     Request *Build() override;
 
   private:
+    Socket mSocket{};
     std::string mReason{};
 };

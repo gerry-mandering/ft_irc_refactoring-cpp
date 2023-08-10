@@ -25,12 +25,14 @@ class InviteRequest : public Request, public visitor_pattern::Acceptor
 class InviteRequestBuilder : public RequestBuilder
 {
   public:
+    InviteRequestBuilder &SetSocket(Socket socket) override;
     InviteRequestBuilder &SetNickname(const std::string &nickname);
     InviteRequestBuilder &SetChannelname(const std::string &channelname);
 
     Request *Build() override;
 
   private:
+    Socket mSocket{};
     std::string mNickname{};
     std::string mChannelname{};
 };

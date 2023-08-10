@@ -29,12 +29,14 @@ class JoinRequest : public Request, public visitor_pattern::Acceptor
 class JoinRequestBuilder : public RequestBuilder
 {
   public:
+    JoinRequestBuilder &SetSocket(Socket socket) override;
     JoinRequestBuilder &SetChannelnames(const std::string &channelnames);
     JoinRequestBuilder &SetPasswords(const std::string &passwords);
 
     Request *Build() override;
 
   private:
+    Socket mSocket;
     std::vector< std::string > mChannelnames;
     std::vector< std::string > mPasswords;
 };

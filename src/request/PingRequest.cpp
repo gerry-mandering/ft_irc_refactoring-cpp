@@ -12,6 +12,12 @@ const std::string &PingRequest::GetToken() const
 
 PingRequest::PingRequest(Socket socket, const std::string &token) : Request(socket) {}
 
+PingRequestBuilder &PingRequestBuilder::SetSocket(Socket socket)
+{
+    mSocket = socket;
+    return *this;
+}
+
 PingRequestBuilder &PingRequestBuilder::SetToken(const std::string &token)
 {
     mToken = token;

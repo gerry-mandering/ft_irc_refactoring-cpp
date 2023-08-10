@@ -23,10 +23,12 @@ class PassRequest : public Request, public visitor_pattern::Acceptor
 class PassRequestBuilder : public RequestBuilder
 {
   public:
+    PassRequestBuilder &SetSocket(Socket socket) override;
     PassRequestBuilder &SetPassword(const std::string &password);
 
     Request *Build() override;
 
   private:
+    Socket mSocket{};
     std::string mPassword{};
 };

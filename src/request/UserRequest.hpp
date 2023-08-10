@@ -30,6 +30,7 @@ class UserRequest : public Request, public visitor_pattern::Acceptor
 class UserRequestBuilder : public RequestBuilder
 {
   public:
+    UserRequestBuilder &SetSocket(Socket socket) override;
     UserRequestBuilder &SetUsername(const std::string &username);
     UserRequestBuilder &SetHostname(const std::string &hostname);
     UserRequestBuilder &SetServername(const std::string &servername);
@@ -38,8 +39,9 @@ class UserRequestBuilder : public RequestBuilder
     Request *Build() override;
 
   private:
-    std::string mUsername;
-    std::string mHostname;
-    std::string mServername;
-    std::string mRealname;
+    Socket mSocket{};
+    std::string mUsername{};
+    std::string mHostname{};
+    std::string mServername{};
+    std::string mRealname{};
 };

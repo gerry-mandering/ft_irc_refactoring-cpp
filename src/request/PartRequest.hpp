@@ -28,12 +28,14 @@ class PartRequest : public Request, public visitor_pattern::Acceptor
 class PartRequestBuilder : public RequestBuilder
 {
   public:
+    PartRequestBuilder &SetSocket(Socket socket) override;
     PartRequestBuilder &SetChannelnames(const std::vector< std::string > &channelnames);
     PartRequestBuilder &SetReason(const std::string &reason);
 
     Request *Build() override;
 
   private:
+    Socket mSocket{};
     std::vector< std::string > mChannelnames{};
     std::string mReason{};
 };

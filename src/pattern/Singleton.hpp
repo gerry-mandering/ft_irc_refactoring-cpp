@@ -5,7 +5,7 @@ class Singleton
 {
 
   public:
-    static T &GetInstance()
+    static T *GetInstance()
     {
         if (mInstance == nullptr)
         {

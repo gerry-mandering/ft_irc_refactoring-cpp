@@ -31,6 +31,12 @@ KickRequest::KickRequest(Socket socket, const std::string &channelname, const st
 {
 }
 
+KickRequestBuilder &KickRequestBuilder::SetSocket(Socket socket)
+{
+    mSocket = socket;
+    return *this;
+}
+
 KickRequestBuilder &KickRequestBuilder::SetChannelname(const std::string &channelname)
 {
     mChannelname = channelname;

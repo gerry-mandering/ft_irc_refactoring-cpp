@@ -31,6 +31,12 @@ UserRequest::UserRequest(Socket socket, const std::string &username, const std::
 {
 }
 
+UserRequestBuilder &UserRequestBuilder::SetSocket(Socket socket)
+{
+    mSocket = socket;
+    return *this;
+}
+
 UserRequestBuilder &UserRequestBuilder::SetUsername(const std::string &username)
 {
     mUsername = username;

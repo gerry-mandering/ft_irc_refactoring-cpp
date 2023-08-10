@@ -26,6 +26,12 @@ JoinRequest::JoinRequest(Socket socket, const std::vector< std::string > &channe
 {
 }
 
+JoinRequestBuilder &JoinRequestBuilder::SetSocket(Socket socket)
+{
+    mSocket = socket;
+    return *this;
+}
+
 JoinRequestBuilder &JoinRequestBuilder::SetChannelnames(const std::string &channelnames)
 {
     mChannelnames = channelnames;
