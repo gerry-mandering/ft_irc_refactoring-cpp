@@ -18,7 +18,7 @@ class Request
 
   private:
     Socket mSocket;
-    std::weak_ptr< Client > mClient;
+    std::shared_ptr< Client > mClient;
 };
 
 class RequestBuilder
