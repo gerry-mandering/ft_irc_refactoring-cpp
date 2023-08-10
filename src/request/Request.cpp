@@ -5,7 +5,7 @@ Request::Request(Socket socket)
     mSocket = socket;
 }
 
-shared_ptr< Client > Request::GetClient() const
+std::shared_ptr< Client > Request::GetClient() const
 {
     if (auto clientPtr = mClient.lock())
     {
@@ -15,4 +15,10 @@ shared_ptr< Client > Request::GetClient() const
     {
         return nullptr;
     }
+}
+
+RequestBuilder &RequestBuilder::SetSocket(Socket socket)
+{
+    mSocket = socket;
+    return *this;
 }
