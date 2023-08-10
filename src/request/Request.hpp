@@ -21,8 +21,6 @@ class Request
     std::weak_ptr< Client > mClient;
 };
 
-////////////////////////////////////////////////
-
 class RequestBuilder
 {
   public:

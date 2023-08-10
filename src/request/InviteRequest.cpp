@@ -20,8 +20,6 @@ InviteRequest::InviteRequest(Socket socket, const std::string &nickname, const s
 {
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////
-
 InviteRequestBuilder &InviteRequestBuilder::SetNickname(const std::string &nickname)
 {
     mNickname = nickname;

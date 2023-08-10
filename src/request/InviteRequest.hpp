@@ -22,8 +22,6 @@ class InviteRequest : public Request, public visitor_pattern::Acceptor
     std::string mChannelname;
 };
 
-/////////////////////////////////////////////////////////////////////////
-
 class InviteRequestBuilder : public RequestBuilder
 {
   public:
