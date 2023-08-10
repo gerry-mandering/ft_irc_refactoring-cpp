@@ -3,11 +3,6 @@
 #include <iostream>
 #include <sstream>
 
-Dotenv::Dotenv(const std::string &filename)
-{
-    LoadEnvFromFile(filename);
-}
-
 void Dotenv::LoadEnvFromFile(const std::string &filename)
 {
     std::ifstream file(filename);
