@@ -8,7 +8,6 @@ class InviteRequest : public Request, public visitor_pattern::Acceptor
   public:
     bool Accept(visitor_pattern::Visitor *visitor) override;
 
-  public:
     const std::string &GetNickname() const;
     const std::string &GetChannelname() const;
 
