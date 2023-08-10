@@ -10,30 +10,30 @@ class PartRequest : public Request, public visitor_pattern::Acceptor
   public:
     bool Accept(visitor_pattern::Visitor *visitor) override;
 
-    const std::vector< std::string > &GetChannels() const;
+    const std::vector< std::string > &GetChannelnames() const;
     const std::string &GetReason() const;
 
-    void SetChannels(const std::vector< std::string > &channels);
+    void SetChannelnames(const std::vector< std::string > &channelnames);
 
     friend class PartRequestBuilder;
 
   private:
-    PartRequest(Socket socket, const std::vector< std::string > &channels, const std::string &reason);
+    PartRequest(Socket socket, const std::vector< std::string > &channelnames, const std::string &reason);
 
   private:
-    std::vector< std::string > mChannels;
+    std::vector< std::string > mChannelnames;
     std::string mReason;
 };
 
 class PartRequestBuilder : public RequestBuilder
 {
   public:
-    PartRequestBuilder &SetChannels(const std::vector< std::string > &channels);
+    PartRequestBuilder &SetChannelnames(const std::vector< std::string > &channelnames);
     PartRequestBuilder &SetReason(const std::string &reason);
 
     Request *Build() override;
 
   private:
-    std::vector< std::string > mChannels{};
+    std::vector< std::string > mChannelnames{};
     std::string mReason{};
 };

@@ -5,9 +5,9 @@ bool PartRequest::Accept(visitor_pattern::Visitor *visitor)
     return visitor->Visit(this);
 }
 
-const std::vector< std::string > &PartRequest::GetChannels() const
+const std::vector< std::string > &PartRequest::GetChannelnames() const
 {
-    return mChannels;
+    return mChannelnames;
 }
 
 const std::string &PartRequest::GetReason() const
@@ -15,19 +15,19 @@ const std::string &PartRequest::GetReason() const
     return mReason;
 }
 
-void PartRequest::SetChannels(const std::vector< std::string > &channels)
+void PartRequest::SetChannelnames(const std::vector< std::string > &channelnames)
 {
-    mChannels = channels;
+    mChannelnames = channelnames;
 }
 
-PartRequest::PartRequest(Socket socket, const std::vector< std::string > &channels, const std::string &reason)
+PartRequest::PartRequest(Socket socket, const std::vector< std::string > &channelnames, const std::string &reason)
     : Request(socket)
 {
 }
 
-PartRequestBuilder &PartRequestBuilder::SetChannels(const std::vector< std::string > &channels)
+PartRequestBuilder &PartRequestBuilder::SetChannelnames(const std::vector< std::string > &channelnames)
 {
-    mChannels = channels;
+    mChannelnames = channelnames;
     return *this;
 }
 
@@ -39,5 +39,5 @@ PartRequestBuilder &PartRequestBuilder::SetReason(const std::string &reason)
 
 Request *PartRequestBuilder::Build()
 {
-    return new PartRequest(mSocket, mChannels, mReason);
+    return new PartRequest(mSocket, mChannelnames, mReason);
 }
