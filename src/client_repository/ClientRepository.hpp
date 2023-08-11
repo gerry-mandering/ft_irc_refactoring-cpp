@@ -15,7 +15,7 @@ class ClientRepository : public Singleton< ClientRepository >
     void AddClientToNicknameMap(std::shared_ptr< Client > client);
 
     std::shared_ptr< Client > FindBySocket(Socket socket);
-    std::shared_ptr< Client > FindByName(const string &name);
+    std::shared_ptr< Client > FindByName(const std::string &name);
 
     int GetNumberOfClients() const;
 
@@ -24,5 +24,5 @@ class ClientRepository : public Singleton< ClientRepository >
 
   private:
     std::map< Socket, std::shared_ptr< Client > > mSocketToClientMap;
-    std::map< string, std::shared_ptr< Client > > mNicknameToClientMap;
+    std::map< std::string, std::shared_ptr< Client > > mNicknameToClientMap;
 };
