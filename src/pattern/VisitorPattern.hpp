@@ -18,6 +18,8 @@ namespace visitor_pattern
 class Visitor
 {
   public:
+    virtual ~Visitor() = default;
+
     virtual bool Visit(InviteRequest *inviteRequest) const = 0;
     virtual bool Visit(JoinRequest *joinRequest) const = 0;
     virtual bool Visit(KickRequest *kickRequest) const = 0;
