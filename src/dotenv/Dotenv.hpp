@@ -7,8 +7,6 @@
 class Dotenv : public Singleton< Dotenv >
 {
   public:
-    Dotenv() = delete;
-
     void LoadEnvFromFile(const std::string &filename);
     std::string Get(const std::string &key);
 
