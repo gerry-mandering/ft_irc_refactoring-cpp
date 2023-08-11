@@ -18,6 +18,7 @@ class Client : public std::enable_shared_from_this< Client >
     ~Client() = default;
 
     Socket GetSocket() const;
+    void AddResponse(const std::string &response);
 
     void JoinChannel(std::shared_ptr< Channel > channel);
     void LeaveChannel(std::shared_ptr< Channel > channel);
@@ -46,6 +47,7 @@ class Client : public std::enable_shared_from_this< Client >
 
   private:
     Socket mSocket;
+    std::string mResponseBuffer{};
 
     std::vector< std::weak_ptr< Channel > > mChannels;
 

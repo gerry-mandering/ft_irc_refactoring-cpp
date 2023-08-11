@@ -8,6 +8,11 @@ int Client::GetSocket() const
     return mSocket;
 }
 
+void Client::AddResponse(const std::string &response)
+{
+    mResponseBuffer += response;
+}
+
 void Client::JoinChannel(std::shared_ptr< Channel > channel)
 {
     mChannels.push_back(channel);
