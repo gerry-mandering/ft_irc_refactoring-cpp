@@ -10,8 +10,6 @@
 class Validator : public Singleton< Validator >, public visitor_pattern::Visitor
 {
   public:
-    ~Validator() override;
-
     bool Visit(InviteRequest *inviteRequest) const override;
     bool Visit(JoinRequest *joinRequest) const override;
     bool Visit(KickRequest *kickRequest) const override;

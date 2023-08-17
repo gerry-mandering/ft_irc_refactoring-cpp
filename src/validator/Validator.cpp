@@ -16,11 +16,6 @@
 #include "UserRequest.hpp"
 #include <memory>
 
-Validator::~Validator()
-{
-    delete mResponseDispatcher;
-}
-
 bool Validator::Visit(InviteRequest *inviteRequest) const
 {
     std::shared_ptr< Client > client = inviteRequest->GetClient();
