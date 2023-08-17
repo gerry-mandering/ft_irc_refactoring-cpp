@@ -40,32 +40,57 @@ bool Validator::Visit(InviteRequest *inviteRequest) const
                                                 .SetChannelname(inviteRequest->GetChannelname())
                                                 .Build();
 
-        mResponseDispatcher->DispatchNoSuchChannelMsg(noSuchChannelDto);
+        mResponseDispatcher.DispatchNoSuchChannelMsg(noSuchChannelDto);
         return false;
     }
 
     std::shared_ptr< Client > targetClient = mClientRepository->FindByName(inviteRequest->GetNickname());
     if (!targetClient)
     {
-        mResponseDispatcher->DispatchNoSuchNickMsg();
+        NoSuchNickDto noSuchNickDto = NoSuchNickDtoBuilder()
+                                          .SetRecipient(client)
+                                          .SetNickname(client->GetNickname())
+                                          .SetTargetNickname(inviteRequest->GetNickname())
+                                          .Build();
+
+        mResponseDispatcher.DispatchNoSuchNickMsg(noSuchNickDto);
         return false;
     }
 
     if (!channel->IsClientExist(client))
     {
-        mResponseDispatcher->DispatchNotOnChannelMsg();
+        NotOnChannelDto notOnChannelDto = NotOnChannelDtoBuilder()
+                                              .SetRecipient(client)
+                                              .SetNickname(client->GetNickname())
+                                              .SetChannelname(inviteRequest->GetChannelname())
+                                              .Build();
+
+        mResponseDispatcher.DispatchNotOnChannelMsg(notOnChannelDto);
         return false;
     }
 
     if (channel->IsClientExist(targetClient))
     {
-        mResponseDispatcher->DispatchUserOnChannelMsg();
+        UserOnChannelDto userOnChannelDto = UserOnChannelDtoBuilder()
+                                                .SetRecipient(client)
+                                                .SetNickname(client->GetNickname())
+                                                .SetTargetNickname(inviteRequest->GetNickname())
+                                                .SetChannelname(inviteRequest->GetChannelname())
+                                                .Build();
+
+        mResponseDispatcher.DispatchUserOnChannelMsg(userOnChannelDto);
         return false;
     }
 
     if (!channel->IsClientAdmin(client))
     {
-        mResponseDispatcher->DispatchNotChannelOperatorMsg();
+        NotChannelOperatorDto notChannelOperatorDto = NotChannelOperatorDtoBuilder()
+                                                          .SetRecipient(client)
+                                                          .SetNickname(client->GetNickname())
+                                                          .SetChannelName(inviteRequest->GetChannelname())
+                                                          .Build();
+
+        mResponseDispatcher.DispatchNotChannelOperatorMsg(notChannelOperatorDto);
         return false;
     }
 
