@@ -1,12 +1,10 @@
 #include "Validator.hpp"
 #include "Client.hpp"
-#include "Dotenv.hpp"
 #include "InviteRequest.hpp"
 #include "JoinRequest.hpp"
 #include "KickRequest.hpp"
 #include "ModeRequest.hpp"
 #include "NickRequest.hpp"
-#include "NotRegisteredDto.hpp"
 #include "PartRequest.hpp"
 #include "PassRequest.hpp"
 #include "PingRequest.hpp"
@@ -104,7 +102,93 @@ bool Validator::Visit(JoinRequest *joinRequest) const
 
 bool Validator::Visit(KickRequest *kickRequest) const
 {
-    return true;
+    std::shared_ptr< Client > client = kickRequest->GetClient();
+    if (!client->HasRegistered())
+    {
+        NotRegisteredDto notRegisteredDto = NotRegisteredDtoBuilder()
+                                                .SetRecipient(client)
+                                                .SetRequestType("KICK")
+                                                .SetNickname(client->GetNickname())
+                                                .Build();
+
+        mResponseDispatcher.DispatchNotRegisteredMsg(notRegisteredDto);
+        return false;
+    }
+
+    std::shared_ptr< Channel > channel = mChannelRepository->FindByName(kickRequest->GetChannelname());
+    if (!channel)
+    {
+        NoSuchChannelDto noSuchChannelDto = NoSuchChannelDtoBuilder()
+                                                .SetRecipient(client)
+                                                .SetNickname(client->GetNickname())
+                                                .SetChannelname(kickRequest->GetChannelname())
+                                                .Build();
+
+        mResponseDispatcher.DispatchNoSuchChannelMsg(noSuchChannelDto);
+        return false;
+    }
+
+    std::vector< std::string > targets = kickRequest->GetTargets();
+    std::vector< std::string > validatedTargets;
+
+    for (auto target : targets)
+    {
+        std::shared_ptr< Client > targetClient = mClientRepository->FindByName(target);
+        if (!targetClient)
+        {
+            NoSuchNickDto noSuchNickDto = NoSuchNickDtoBuilder()
+                                              .SetRecipient(client)
+                                              .SetNickname(client->GetNickname())
+                                              .SetTargetNickname(target)
+                                              .Build();
+
+            mResponseDispatcher.DispatchNoSuchNickMsg(noSuchNickDto);
+            continue;
+        }
+
+        if (!channel->IsClientExist(client))
+        {
+            NotOnChannelDto notOnChannelDto = NotOnChannelDtoBuilder()
+                                                  .SetRecipient(client)
+                                                  .SetNickname(client->GetNickname())
+                                                  .SetChannelname(kickRequest->GetChannelname())
+                                                  .Build();
+
+            mResponseDispatcher.DispatchNotOnChannelMsg(notOnChannelDto);
+            return false; // TODO 검증
+        }
+
+        if (!channel->IsClientExist(targetClient))
+        {
+            UserNotInChannelDto userNotInChannelDto = UserNotInChannelDtoBuilder();
+
+            mResponseDispatcher.DispatchUserNotInChannelMsg(userNotInChannelDto);
+            continue;
+        }
+
+        if (!channel->IsClientAdmin(client))
+        {
+            NotChannelOperatorDto notChannelOperatorDto = NotChannelOperatorDtoBuilder()
+                                                              .SetRecipient(client)
+                                                              .SetNickname(client->GetNickname())
+                                                              .SetChannelName(kickRequest->GetChannelname())
+                                                              .Build();
+
+            mResponseDispatcher.DispatchNotChannelOperatorMsg(notChannelOperatorDto);
+            return false; // TODO 검증
+        }
+
+        validatedTargets.push_back(target);
+    }
+
+    if (validatedTargets.empty())
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 bool Validator::Visit(ModeRequest *modeRequest) const
