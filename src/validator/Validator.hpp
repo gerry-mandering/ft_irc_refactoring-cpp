@@ -2,7 +2,6 @@
 
 #include "ChannelRepository.hpp"
 #include "ClientRepository.hpp"
-#include "ResponseDispatcher.hpp"
 #include "Singleton.hpp"
 #include "ValidationResponseDispatcher.hpp"
 #include "VisitorPattern.hpp"
